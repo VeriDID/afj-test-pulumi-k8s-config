@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: afj-test-deployment
+  namespace: afj-test-app
+  labels:
+    app: afj-test
+spec:
+  selector:
+    matchLabels:
+      app: afj-test
+  replicas: 1
+  # strategy: 
+  # type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: afj-test
+    spec:
+      containers:
+        - name: docker-build
+          image: "ghcr.io/veridid/afj-test:sha-beb2903"
+          imagePullPolicy: Always
+          env:
+            - name: COGNITO_USER_POOL_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognito-secret
+                  key: cognito-user-pool-id
+            - name: COGNITO_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: cognito-secret
+                  key: cognito-client-id
+            - name: COGNITO_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: cognito-secret
+                  key: cognito-region
+                  # - name: POSTGRES_USER
+                  #   valueFrom:
+                  #     secretKeyRef:
+                  #       name: postgres-secret
+                  #       key: postgres-user
+                  # - name: POSTGRES_PASSWORD
+                  #   valueFrom:
+                  #     secretKeyRef:
+                  #       name: postgres-secret
+                  #       key: postgres-password
+                  # - name: POSTGRES_HOST
+                  #   valueFrom:
+                  #     configMapKeyRef:
+                  #       name: postgres-config
+                  #       key: postgres-url
+      imagePullSecrets:
+        - name: ghcr-secret
