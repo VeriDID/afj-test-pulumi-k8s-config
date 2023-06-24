@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: docker-build
-          image: "ghcr.io/veridid/dummy_app:sha-d751ab8"
+          image: "ghcr.io/veridid/dummy_app:sha-3af5081"
           imagePullPolicy: Always
           env:
             - name: AWS_COGNITO_USER_POOL_ID
