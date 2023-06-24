@@ -22,17 +22,17 @@ spec:
           image: "ghcr.io/veridid/dummy_app:sha-0094c37"
           imagePullPolicy: Always
           env:
-            - name: COGNITO_USER_POOL_ID
+            - name: AWS_COGNITO_USER_POOL_ID
               valueFrom:
                 secretKeyRef:
                   name: cognito-secret
                   key: AWS_COGNITO_USER_POOL_ID
-            - name: COGNITO_CLIENT_ID
+            - name: AWS_COGNITO_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: cognito-secret
                   key: AWS_COGNITO_CLIENT_ID
-            - name: COGNITO_REGION
+            - name: AWS_REGION
               valueFrom:
                 secretKeyRef:
                   name: cognito-secret
