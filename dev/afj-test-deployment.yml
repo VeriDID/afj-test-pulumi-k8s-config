@@ -10,7 +10,7 @@ spec:
     matchLabels:
       app: afj-test
   replicas: 1
-  # strategy: 
+  # strategy:
   # type: RollingUpdate
   template:
     metadata:
@@ -26,31 +26,16 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: cognito-secret
-                  key: cognito-user-pool-id
+                  key: AWS_COGNITO_USER_POOL_ID
             - name: COGNITO_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: cognito-secret
-                  key: cognito-client-id
+                  key: AWS_COGNITO_CLIENT_ID
             - name: COGNITO_REGION
               valueFrom:
                 secretKeyRef:
                   name: cognito-secret
-                  key: cognito-region
-                  # - name: POSTGRES_USER
-                  #   valueFrom:
-                  #     secretKeyRef:
-                  #       name: postgres-secret
-                  #       key: postgres-user
-                  # - name: POSTGRES_PASSWORD
-                  #   valueFrom:
-                  #     secretKeyRef:
-                  #       name: postgres-secret
-                  #       key: postgres-password
-                  # - name: POSTGRES_HOST
-                  #   valueFrom:
-                  #     configMapKeyRef:
-                  #       name: postgres-config
-                  #       key: postgres-url
+                  key: AWS_REGION
       imagePullSecrets:
         - name: ghcr-secret
